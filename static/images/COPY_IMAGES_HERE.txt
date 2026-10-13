@@ -1,0 +1,1 @@
+Copy SYPLab-logo-white(1).png from the original project static/images/ into this folder before publishing.
