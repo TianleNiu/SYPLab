@@ -1,0 +1,10 @@
+git status：查看哪些文件修改了。
+
+git add .：将当前项目中的修改加入暂存区。
+
+git commit -m "..."：保存一次修改记录。
+
+git push origin main：上传到 GitHub。
+
+
+git pull origin main
