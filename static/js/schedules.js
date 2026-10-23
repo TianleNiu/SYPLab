@@ -66,13 +66,7 @@ function renderTables() {
         const records = entries
             .filter(x => x.category === category)
             .sort((a, b) => {
-                if (category === "meeting") {
-                    // Team Meeting：最新日期在最上面
-                    return b.start_date.localeCompare(a.start_date);
-                }
-
-                // Cleaning 和 FIST：最早日期在最上面
-                return a.start_date.localeCompare(b.start_date);
+                return b.start_date.localeCompare(a.start_date);
             });
 
         // 只在管理员登录后显示操作列
