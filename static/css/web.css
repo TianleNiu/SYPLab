@@ -700,3 +700,275 @@ a {
         margin-bottom: 5px;
     }
 }
+
+/* ====================================
+   SYPLab · Minimal Admin Access
+   ==================================== */
+
+.schedule-admin-panel {
+    margin-top: 30px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* Collapsible panel */
+
+.admin-disclosure,
+.admin-logged-panel {
+    width: 100%;
+    border: 1px solid rgba(30, 40, 50, 0.09);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 6px 30px rgba(20, 30, 40, 0.035);
+    overflow: hidden;
+}
+
+.admin-disclosure[hidden],
+.admin-logged-panel[hidden],
+#schedule-login-form[hidden] {
+    display: none !important;
+}
+
+.admin-trigger {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 22px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: background 0.2s ease;
+}
+
+.admin-trigger::-webkit-details-marker {
+    display: none;
+}
+
+.admin-trigger::marker {
+    content: "";
+}
+
+.admin-trigger:hover {
+    background: #fafbfc;
+}
+
+.admin-trigger-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: #f2f3f5;
+    font-size: 20px;
+    color: #4d5560;
+}
+
+.admin-trigger-text,
+.admin-logged-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.admin-trigger-text strong,
+.admin-logged-text strong {
+    font-size: 14px;
+    font-weight: 650;
+    color: #252a30;
+}
+
+.admin-trigger-text small,
+.admin-logged-text small {
+    font-size: 12px;
+    color: #8a919a;
+}
+
+.admin-chevron {
+    width: 9px;
+    height: 9px;
+    margin-left: auto;
+    margin-right: 6px;
+    border-right: 1.7px solid #8a919a;
+    border-bottom: 1.7px solid #8a919a;
+    transform: rotate(45deg);
+    transition: transform 0.22s ease;
+}
+
+.admin-disclosure[open] .admin-chevron {
+    transform: rotate(225deg);
+}
+
+.admin-expand-content {
+    padding: 0 22px 24px;
+    animation: adminReveal 0.25s ease;
+}
+
+@keyframes adminReveal {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.admin-divider {
+    height: 1px;
+    background: #f0f1f3;
+    margin-bottom: 19px;
+}
+
+.admin-description {
+    font-size: 13px;
+    color: #818892;
+    line-height: 1.6;
+    margin: 0 0 20px;
+}
+
+/* Form */
+
+#schedule-login-form.admin-login-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 14px;
+    align-items: end;
+}
+
+.admin-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.admin-input-group label {
+    color: #5e6771;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.admin-input-group input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 44px;
+    border: 1px solid #e0e4e8;
+    border-radius: 11px;
+    padding: 0 13px;
+    background: #fafbfc;
+    font: inherit;
+    font-size: 13px;
+    color: #252a30;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.admin-input-group input:focus {
+    background: #fff;
+    border-color: #9aa5b1;
+    box-shadow: 0 0 0 3px rgba(100, 115, 130, 0.09);
+}
+
+.admin-login-button {
+    height: 44px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 11px;
+    background: #252b32;
+    color: white;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.admin-login-button:hover {
+    background: #424b55;
+    transform: translateY(-1px);
+}
+
+.admin-login-button span {
+    margin-left: 9px;
+}
+
+/* Signed-in state */
+
+.admin-logged-panel {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 22px;
+    box-sizing: border-box;
+}
+
+.admin-status-indicator {
+    width: 10px;
+    height: 10px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #43aa73;
+    box-shadow: 0 0 0 5px rgba(67, 170, 115, 0.11);
+    margin: 0 9px;
+}
+
+.admin-logout-button {
+    margin-left: auto;
+    border: 1px solid #e4e7eb;
+    background: #fff;
+    color: #59626c;
+    padding: 9px 15px;
+    border-radius: 9px;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.admin-logout-button:hover {
+    background: #f5f6f8;
+}
+
+/* Status messages */
+
+#schedule-message {
+    margin: 10px 4px 0;
+    color: #7d858e;
+    font-size: 12px;
+}
+
+#schedule-message:empty {
+    display: none;
+}
+
+/* Responsive layout */
+
+@media (max-width: 760px) {
+    #schedule-login-form.admin-login-form {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-login-button {
+        width: 100%;
+    }
+
+    .admin-trigger,
+    .admin-logged-panel {
+        padding: 16px;
+    }
+
+    .admin-expand-content {
+        padding: 0 16px 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .admin-expand-content {
+        animation: none;
+    }
+}

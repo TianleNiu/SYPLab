@@ -160,7 +160,7 @@ async function loadEntries() {
 
     entries = data || [];
     renderTables();
-    showMessage("日程已更新");
+    showMessage("已更新");
 }
 
 function createEditor() {
@@ -292,22 +292,74 @@ function createAdminPanel() {
     const section = $("#list");
     const panel = make("div", "schedule-admin-panel");
 
+
     panel.innerHTML = `
-      <form id="schedule-login-form">
-        <input id="admin-email" type="email"
-               placeholder="Admin email" required autocomplete="username">
-        <input id="admin-password" type="password"
-               placeholder="Password" required
-               autocomplete="current-password">
-        <button class="schedule-btn" type="submit">Admin Login</button>
+  <details class="admin-disclosure" id="admin-disclosure">
+    <summary class="admin-trigger">
+      <span class="admin-trigger-icon">⌘</span>
+      <span class="admin-trigger-text">
+        <strong>Admin Access</strong>
+        <small>Authorized personnel only</small>
+      </span>
+      <span class="admin-chevron"></span>
+    </summary>
+
+    <div class="admin-expand-content">
+      <div class="admin-divider"></div>
+
+      <p class="admin-description">
+        Sign in to manage SYPLab schedules and records.
+      </p>
+
+      <form id="schedule-login-form" class="admin-login-form">
+        <div class="admin-input-group">
+          <label for="admin-email">Email address</label>
+          <input
+            id="admin-email"
+            type="email"
+            placeholder="Enter your email"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <div class="admin-input-group">
+          <label for="admin-password">Password</label>
+          <input
+            id="admin-password"
+            type="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+          >
+        </div>
+
+        <button type="submit" class="admin-login-button">
+          Sign in <span aria-hidden="true">→</span>
+        </button>
       </form>
-      <div id="schedule-admin-logged" hidden>
-        <span>Administrator</span>
-        <button class="schedule-btn" id="schedule-logout"
-                type="button">Log out</button>
-      </div>
-      <p id="schedule-message" role="status"></p>
-    `;
+    </div>
+  </details>
+
+  <div id="schedule-admin-logged"
+       class="admin-logged-panel"
+       hidden>
+    <span class="admin-status-indicator"></span>
+    <span class="admin-logged-text">
+      <strong>Administrator</strong>
+      <small>Schedule editing enabled</small>
+    </span>
+
+    <button id="schedule-logout"
+            type="button"
+            class="admin-logout-button">
+      Log out
+    </button>
+  </div>
+
+  <p id="schedule-message" role="status"></p>
+`;
+
 
     section.append(panel);
 
@@ -347,16 +399,27 @@ function createAdminPanel() {
     };
 }
 
-function updateLoginUI() {
-    $("#schedule-login-form").hidden = isAdmin();
-    $("#schedule-admin-logged").hidden = !isAdmin();
 
-    if (currentUser && !isAdmin()) {
-        showMessage("当前账号不是管理员，没有编辑权限。");
+function updateLoginUI() {
+    const admin = isAdmin();
+    const disclosure = $("#admin-disclosure");
+
+    disclosure.hidden = admin;
+    $("#schedule-admin-logged").hidden = !admin;
+
+    // 登录成功后自动折叠登录表单
+    if (admin) {
+        disclosure.open = false;
+        $("#admin-password").value = "";
+        showMessage("");
+    } else if (currentUser) {
+        disclosure.open = true;
+        showMessage("当前账号没有管理员权限。");
     }
 
     renderTables();
 }
+
 
 async function initSchedules() {
     createAdminPanel();
