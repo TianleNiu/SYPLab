@@ -582,3 +582,121 @@ a {
         transition: none !important;
     }
 }
+
+/* SYPLab schedule administration */
+
+.schedule-admin-panel {
+    margin-top: 28px;
+    padding: 18px;
+    border: 1px solid #e9ecef;
+    border-radius: 16px;
+    background: #fafbfc;
+}
+
+#schedule-login-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#schedule-login-form[hidden],
+#schedule-admin-logged[hidden] {
+    display: none;
+}
+
+.schedule-admin-panel input,
+.schedule-form input {
+    font: inherit;
+    padding: 11px 13px;
+    border: 1px solid #d9dde1;
+    border-radius: 9px;
+    background: white;
+}
+
+.schedule-btn {
+    border: 1px solid #dce0e4;
+    background: white;
+    color: #333;
+    border-radius: 9px;
+    padding: 9px 13px;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.schedule-btn:hover {
+    background: #f0f2f4;
+}
+
+.schedule-btn.danger {
+    color: #b42318;
+}
+
+.schedule-actions {
+    white-space: nowrap;
+}
+
+#schedule-message {
+    font-size: 13px;
+    color: #666;
+    margin: 12px 0 0;
+}
+
+.schedule-dialog {
+    width: min(94vw, 440px);
+    border: 0;
+    border-radius: 20px;
+    padding: 26px;
+    box-shadow: 0 25px 80px #0003;
+}
+
+.schedule-dialog::backdrop {
+    background: #0006;
+    backdrop-filter: blur(3px);
+}
+
+.schedule-form {
+    display: grid;
+    gap: 12px;
+}
+
+.schedule-form h3 {
+    margin: 0 0 8px;
+    font-size: 23px;
+}
+
+.schedule-form label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.schedule-form input {
+    width: 100%;
+    min-width: 0;
+}
+
+.schedule-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+#schedule-editor-error {
+    color: #b42318;
+    font-size: 13px;
+    margin: 0;
+}
+
+@media (max-width: 720px) {
+    #schedule-login-form input {
+        width: 100%;
+    }
+
+    .schedule-actions .schedule-btn {
+        display: block;
+        margin-bottom: 5px;
+    }
+}
