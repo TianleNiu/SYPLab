@@ -972,3 +972,137 @@ a {
         animation: none;
     }
 }
+
+/* ==================================
+   SYPLab · Laboratory Resources
+   ================================== */
+
+.lab-resources {
+    margin-top: 28px;
+    padding: 28px;
+}
+
+.lab-resources-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.lab-resources-header h3 {
+    margin: 0 0 8px;
+    font-size: 23px;
+    font-weight: 700;
+    color: #252a30;
+}
+
+.lab-resources-header p {
+    margin: 0;
+    color: #818892;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.lab-resource-count {
+    flex-shrink: 0;
+    padding: 7px 12px;
+    border-radius: 30px;
+    background: #f2f4f6;
+    color: #78818b;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.lab-resource-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 19px;
+    border: 1px solid #edf0f2;
+    border-radius: 16px;
+    background: #fafbfc;
+    transition: background 0.2s ease,
+                border-color 0.2s ease;
+}
+
+.lab-resource-item:hover {
+    background: #fff;
+    border-color: #dce1e5;
+}
+
+.lab-resource-icon {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: #e9eef7;
+    color: #48648e;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.lab-resource-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.lab-resource-info h4 {
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 650;
+    color: #252a30;
+}
+
+.lab-resource-info p {
+    margin: 0;
+    font-size: 12px;
+    color: #9098a2;
+}
+
+.lab-download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-shrink: 0;
+    padding: 12px 17px;
+    border: 1px solid #e0e4e8;
+    border-radius: 12px;
+    background: #fff;
+    color: #343b43;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.lab-download-btn:hover {
+    background: #303943;
+    color: #fff;
+    border-color: #303943;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 650px) {
+    .lab-resources {
+        padding: 20px;
+    }
+
+    .lab-resources-header {
+        flex-wrap: wrap;
+    }
+
+    .lab-resource-item {
+        flex-wrap: wrap;
+    }
+
+    .lab-download-btn {
+        width: 100%;
+    }
+}
