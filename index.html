@@ -74,7 +74,7 @@
         
 <section class="content-section" id="supplies" aria-labelledby="supplies-title">
 <div class="section-kicker">00 / LAB SUPPLIES</div><h2 id="supplies-title">Lab Supplies</h2>
-<p>实验室耗材采购 · 人民币报价，数量按只／副／条填写；包装信息供参考。总价为商品金额，运费及税费另行确认。</p>
+<p>实验室耗材采购 · 人民币报价；包装信息供参考。总价为商品金额，运费及税费另行确认。</p>
 <div class="supplies-tools"><label>搜索耗材 <input id="supplies-search" type="search" placeholder="名称或规格"></label><label>分类 <select id="supplies-category"><option value="">全部分类</option><option>医用外科口罩</option><option>橡胶外科手套</option><option>一次性使用医用垫单（两层纸）</option><option>一次性使用医用垫单（棉／高分子）</option></select></label></div>
 <div class="detail-grid" id="supplies-products"></div><p id="supplies-status" role="status" aria-live="polite"></p>
 <article class="detail-card"><h3>采购清单 <span id="supplies-count" class="supplies-count">0 个规格</span></h3><div id="supplies-cart"></div><p id="supplies-total">商品总价：¥0.00</p>
@@ -282,7 +282,7 @@ $('#supplies-form').onsubmit=e=>{e.preventDefault();const d=payload();if(!d)retu
 // Set to the deployed Supabase function URL. No private keys belong here.
 const ORDER_ENDPOINT = 'https://gbsjyqpmyqjdlonovrnx.supabase.co/functions/v1/supplies-order';
 let pending=null,lastSent='';
-$('#supplies-send').onclick=async()=>{const d=payload();if(!d)return;if(!ORDER_ENDPOINT){status('邮件下单暂未开通，请先下载清单。');return}const snapshot=JSON.stringify(d);if(snapshot===lastSent){status('该清单已下单成功，请勿重复提交。');return}if(!pending||pending.snapshot!==snapshot)pending={snapshot,id:crypto.randomUUID()};const button=$('#supplies-send');button.disabled=true;status('正在发送采购清单，请稍候…');try{const response=await fetch(ORDER_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...d,requestId:pending.id}),signal:AbortSignal.timeout(30000)});const result=await response.json();if(!response.ok||result.ok!==true||!result.emailId)throw Error();lastSent=snapshot;status('下单成功！采购清单已提交至邮件服务。订单编号：'+result.orderId+'。你可以下载清单留存。')}catch{status('尚未确认下单成功。清单已保留，可重试或下载；若请求超时，请先联系商家核实。')}finally{button.disabled=false}};
+$('#supplies-send').onclick=async()=>{const d=payload();if(!d)return;if(!ORDER_ENDPOINT){status('邮件下单暂未开通，请先下载清单。');return}const snapshot=JSON.stringify(d);if(snapshot===lastSent){status('该清单已下单成功，请勿重复提交。');return}if(!pending||pending.snapshot!==snapshot)pending={snapshot,id:crypto.randomUUID()};const button=$('#supplies-send');button.disabled=true;status('正在发送采购清单，请稍候…');try{const response=await fetch(ORDER_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...d,requestId:pending.id}),signal:AbortSignal.timeout(30000)});const result=await response.json();if(!response.ok||result.ok!==true||!result.emailId)throw Error();lastSent=snapshot;window.alert('订单已发送成功');status('下单成功！采购清单已提交至邮件服务。订单编号：'+result.orderId+'。你可以下载清单留存。')}catch{status('尚未确认下单成功。清单已保留，可重试或下载；若请求超时，请先联系商家核实。')}finally{button.disabled=false}};
 $('#supplies-search').oninput=catalog;$('#supplies-category').onchange=catalog;$('#supplies-clear').onclick=()=>{cart=[];render();status('清单已清空。')};catalog();render();
 })();
 </script>
