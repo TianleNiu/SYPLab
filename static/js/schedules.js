@@ -84,8 +84,15 @@ function renderTables() {
         thead.append(headerRow);
         tbody.replaceChildren();
 
+
         for (const record of records) {
             const tr = make("tr");
+
+            // 根据 Supabase 中保存的颜色设置整行高亮
+            if (record.row_color) {
+                tr.dataset.highlight = "true";
+                tr.style.backgroundColor = record.row_color;
+            }
 
             for (const key of config.keys) {
                 const value = key.endsWith("_date")
@@ -112,6 +119,7 @@ function renderTables() {
 
             tbody.append(tr);
         }
+
 
         if (!records.length) {
             const tr = make("tr");
@@ -173,6 +181,20 @@ function createEditor() {
 
         <label id="schedule-label-3"></label>
         <input id="schedule-field-3" required maxlength="200">
+        <label for="schedule-row-color">Row highlight</label>
+        
+        <div class="schedule-color-control">
+            <input
+                id="schedule-row-color"
+                type="color"
+                value="#fff3cd"
+            >
+        
+            <label class="schedule-color-toggle">
+                <input id="schedule-highlight-enabled" type="checkbox">
+                Highlight this row
+            </label>
+        </div>
 
         <div class="schedule-form-actions">
           <button type="button" id="schedule-cancel">Cancel</button>
@@ -211,6 +233,13 @@ function openEditor(category, record = null) {
     });
 
     $("#schedule-editor-error").textContent = "";
+
+    $("#schedule-row-color").value =
+        record?.row_color || "#fff3cd";
+
+    $("#schedule-highlight-enabled").checked =
+        Boolean(record?.row_color);
+
     dialog.showModal();
 }
 
@@ -224,6 +253,10 @@ async function saveEntry(event) {
     const id = form.dataset.id;
 
     const payload = { category };
+    payload.row_color =
+    $("#schedule-highlight-enabled").checked
+        ? $("#schedule-row-color").value
+        : null;
 
     config.keys.forEach((key, i) => {
         const value = $(`#schedule-field-${i + 1}`).value.trim();
@@ -243,6 +276,7 @@ async function saveEntry(event) {
 
     let result;
 
+
     if (id) {
         result = await db.from("schedule_entries")
             .update(payload)
@@ -251,6 +285,22 @@ async function saveEntry(event) {
         result = await db.from("schedule_entries")
             .insert(payload);
     }
+
+// 新记录保存成功后，或旧记录编辑成功后
+// 如果启用了高亮，自动清除同一张表中其他行的高亮
+    if (!result.error && payload.row_color) {
+        const {error: clearError} = await db
+            .from("schedule_entries")
+            .update({row_color: null})
+            .eq("category", category)
+            .neq("id", id ? Number(id) : 0)
+            .not("row_color", "is", null);
+
+        if (clearError) {
+            result.error = clearError;
+        }
+    }
+
 
     saveButton.disabled = false;
 
