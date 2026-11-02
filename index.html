@@ -23,6 +23,15 @@
 #supplies input::placeholder,#supplies textarea::placeholder{color:#748491;opacity:1}
 #supplies input:not([type=checkbox]):hover,#supplies select:hover,#supplies textarea:hover{border-color:#9aadb9}
 #supplies input:focus-visible,#supplies select:focus-visible,#supplies textarea:focus-visible{outline:2px solid #668f9f;outline-offset:2px;border-color:#668f9f;box-shadow:0 0 0 3px rgba(102,143,159,.12)}
+
+#supplies .supplies-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:16px 0}
+#supplies .supplies-actions-left{display:flex;gap:10px;flex-wrap:wrap}
+#supplies .supplies-actions button{margin:0;transition:background-color .18s,color .18s,border-color .18s}
+#supplies #supplies-send{margin-left:auto}
+#supplies #supplies-download:hover:not(:disabled),#supplies #supplies-download:focus-visible{background:#315e70;border-color:#315e70;color:#fff}
+#supplies #supplies-clear:hover:not(:disabled),#supplies #supplies-clear:focus-visible{background:#90463f;border-color:#90463f;color:#fff}
+#supplies #supplies-send:hover:not(:disabled),#supplies #supplies-send:focus-visible{background:#286953;border-color:#286953;color:#fff}
+@media(prefers-reduced-motion:reduce){#supplies .supplies-actions button{transition:none}}
 </style>
 </head>
 <body>
@@ -80,7 +89,7 @@
 <article class="detail-card"><h3>采购清单 <span id="supplies-count" class="supplies-count">0 个规格</span></h3><div id="supplies-cart"></div><p id="supplies-total">商品总价：¥0.00</p>
 <form id="supplies-form"><div class="supplies-tools"><label>联系人（必填）<input name="contact" required maxlength="80" autocomplete="name"></label><label>单位名称<input name="organization" maxlength="160" autocomplete="organization"></label><label>联系电话（必填）<input name="phone" type="tel" required minlength="5" maxlength="30" autocomplete="tel"></label></div><label>备注<textarea name="notes" maxlength="2000" rows="3"></textarea></label>
 <p class="supplies-note">联系方式用于生成清单及联系确认采购需求。</p>
-<button type="submit" id="supplies-download">下载采购清单</button><button type="button" id="supplies-send">邮件提交下单</button><button type="button" id="supplies-clear">清空清单</button>
+<div class="supplies-actions"><div class="supplies-actions-left"><button type="submit" id="supplies-download">下载采购清单</button><button type="button" id="supplies-clear">清空清单</button></div><button type="button" id="supplies-send">邮件提交下单</button></div>
 <p><small>点击“邮件提交下单”将把清单和联系方式发送给商家，用于采购沟通。发送成功后可下载留存；刷新页面将清空清单。</small></p></form></article>
 <noscript>请启用 JavaScript 使用商品筛选和采购清单。</noscript></section>
 
