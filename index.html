@@ -74,7 +74,7 @@
         
 <section class="content-section" id="supplies" aria-labelledby="supplies-title">
 <div class="section-kicker">00 / LAB SUPPLIES</div><h2 id="supplies-title">Lab Supplies</h2>
-<p>实验室耗材采购 · 人民币报价；包装信息供参考。总价为商品金额，运费及税费另行确认。</p>
+<p>实验室耗材采购 · 人民币报价，口罩、手套按盒购买，垫单按袋购买，最小购买数量为1。单价为整盒／整袋价格。总价为商品金额，运费及税费另行确认。</p>
 <div class="supplies-tools"><label>搜索耗材 <input id="supplies-search" type="search" placeholder="名称或规格"></label><label>分类 <select id="supplies-category"><option value="">全部分类</option><option>医用外科口罩</option><option>橡胶外科手套</option><option>一次性使用医用垫单（两层纸）</option><option>一次性使用医用垫单（棉／高分子）</option></select></label></div>
 <div class="detail-grid" id="supplies-products"></div><p id="supplies-status" role="status" aria-live="polite"></p>
 <article class="detail-card"><h3>采购清单 <span id="supplies-count" class="supplies-count">0 个规格</span></h3><div id="supplies-cart"></div><p id="supplies-total">商品总价：¥0.00</p>
@@ -268,7 +268,7 @@
 
 <script>
 (()=>{'use strict';
-const products=[{"name": "医用外科口罩", "unit": "只", "specs": [{"name": "挂耳独立装", "price": 220, "pack": "1只/袋、50只/盒、1500只/箱"}, {"name": "系带独立装", "price": 300, "pack": "1只/袋、100只/中包、1400只/箱"}, {"name": "挂耳十只装", "price": 155, "pack": "10只/袋、100只/中包、2400只/箱"}, {"name": "系带十只装", "price": 166, "pack": "10只/袋、100只/中包、2000只/箱"}]}, {"name": "橡胶外科手套", "unit": "副", "specs": [{"name": "有粉", "price": 1543, "pack": "1副/袋、50副/盒、8盒/箱"}, {"name": "无粉", "price": 1543, "pack": "1副/袋、50副/盒、8盒/箱"}]}, {"name": "一次性使用医用垫单（两层纸）", "unit": "条", "specs": [{"name": "40×60cm", "price": 830, "pack": "20条/袋、1500条/箱"}, {"name": "80×150cm", "price": 2320, "pack": "10条/袋、300条/箱"}]}, {"name": "一次性使用医用垫单（棉／高分子）", "unit": "条", "specs": [{"name": "40×60cm（一层棉）", "price": 1070, "pack": "5条/袋、600条/件"}, {"name": "40×60cm（高分子）", "price": 1020, "pack": "20条/袋、1200条/箱"}, {"name": "90×150cm（高分子）", "price": 5760, "pack": "2条/袋、200条/箱"}]}];
+const products=[{"name": "医用外科口罩", "unit": "盒", "specs": [{"name": "挂耳独立装", "price": 11000, "pack": "50只/盒；原包装：1只/袋、50只/盒、1500只/箱"}, {"name": "系带独立装", "price": 30000, "pack": "100只/盒（按原100只/中包折算为1盒）；原包装：1只/袋、100只/中包、1400只/箱"}, {"name": "挂耳十只装", "price": 15500, "pack": "100只/盒（按原100只/中包折算为1盒）；原包装：10只/袋、100只/中包、2400只/箱"}, {"name": "系带十只装", "price": 16600, "pack": "100只/盒（按原100只/中包折算为1盒）；原包装：10只/袋、100只/中包、2000只/箱"}]}, {"name": "橡胶外科手套", "unit": "盒", "specs": [{"name": "有粉", "price": 77150, "pack": "50副/盒；原包装：1副/袋、50副/盒、8盒/箱"}, {"name": "无粉", "price": 77150, "pack": "50副/盒；原包装：1副/袋、50副/盒、8盒/箱"}]}, {"name": "一次性使用医用垫单（两层纸）", "unit": "袋", "specs": [{"name": "40×60cm", "price": 16600, "pack": "20条/袋；原包装：20条/袋、1500条/箱"}, {"name": "80×150cm", "price": 23200, "pack": "10条/袋；原包装：10条/袋、300条/箱"}]}, {"name": "一次性使用医用垫单（棉／高分子）", "unit": "袋", "specs": [{"name": "40×60cm（一层棉）", "price": 5350, "pack": "5条/袋；原包装：5条/袋、600条/件"}, {"name": "40×60cm（高分子）", "price": 20400, "pack": "20条/袋；原包装：20条/袋、1200条/箱"}, {"name": "90×150cm（高分子）", "price": 11520, "pack": "2条/袋；原包装：2条/袋、200条/箱"}]}];
 const root=document.querySelector('#supplies'),$=s=>root.querySelector(s),money=n=>'¥'+(n/1000).toFixed(3).replace(/0$/,'');
 let cart=[];const status=t=>$('#supplies-status').textContent=t;
 function el(tag,text){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n}
