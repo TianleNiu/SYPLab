@@ -39,7 +39,6 @@ a {
     pointer-events: none;
 }
 
-
 /* SYPLab 单组同心圆水波纹 */
 
 .rings {
@@ -158,15 +157,11 @@ a {
     color: #6c6c6c;
     margin: 23px 0 0;
 }
-.quote {
-    color: #aaa;
-}
 .cards {
     max-width: 1048px;
-    margin: 0 auto 185px;
+    margin: 0 auto 110px;
     display: grid;
     gap: 20px;
-    margin-bottom: 110px;
 }
 .apply-card {
     position: relative;
@@ -291,13 +286,6 @@ a {
     color: #929ca5;
     font-weight: 600;
     letter-spacing: .3px;
-}
-.text-link {
-    display: inline-block;
-    font-size: 13px;
-    font-weight: 700;
-    border-bottom: 1px solid #9aa1a8;
-    padding-bottom: 3px;
 }
 .content-section code {
     background: #eef0f2;
@@ -611,7 +599,6 @@ a {
     }
 }
 
-
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
     *, *:before, *:after {
@@ -627,14 +614,6 @@ a {
 }
 
 /* SYPLab schedule administration */
-
-.schedule-admin-panel {
-    margin-top: 28px;
-    padding: 18px;
-    border: 1px solid #e9ecef;
-    border-radius: 16px;
-    background: #fafbfc;
-}
 
 #schedule-login-form {
     display: flex;
@@ -679,12 +658,6 @@ a {
 
 .schedule-actions {
     white-space: nowrap;
-}
-
-#schedule-message {
-    font-size: 13px;
-    color: #666;
-    margin: 12px 0 0;
 }
 
 .schedule-dialog {
@@ -749,6 +722,7 @@ a {
    ==================================== */
 
 .schedule-admin-panel {
+    border-radius: 16px;
     margin-top: 30px;
     padding: 0;
     border: 0;

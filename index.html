@@ -7,32 +7,6 @@
     <link href="./static/images/SYPLab-logo-white(1).png" rel="shortcut icon" type="image/x-icon"/>
     <link href="./static/css/web.css" rel="stylesheet"/>
     <title>SYPLab</title>
-<style>
-#supplies{scroll-margin-top:100px}#supplies .supplies-tools{display:flex;flex-wrap:wrap;gap:16px;margin:20px 0}#supplies label{display:block}#supplies input:not([type=checkbox]),#supplies select,#supplies textarea{display:block;box-sizing:border-box;max-width:100%;padding:10px;margin:8px 0;border:1px solid #84939e;border-radius:8px;background:#fff;color:#172b38;font:inherit}#supplies textarea{width:100%}#supplies button{padding:10px 16px;margin:8px 8px 8px 0;border:1px solid #84939e;border-radius:8px;background:#203b47;color:#fff;cursor:pointer;font:inherit}#supplies button:focus-visible,#supplies input:focus-visible,#supplies select:focus-visible{outline:3px solid #8edac9;outline-offset:3px}#supplies-products{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}#supplies .supplies-row{border-bottom:1px solid #84939e;padding:12px 0}#supplies .supplies-row input{width:100px}
-#supplies-cart{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}#supplies .supplies-row{padding:10px;border:1px solid #84939e;border-radius:8px}#supplies .supplies-row p{margin:4px 0}#supplies .supplies-row input{display:inline-block;width:85px;margin:4px}#supplies-total{font-size:1.25em;font-weight:bold}
-#supplies .detail-card{min-width:0}#supplies-products select{width:100%}#supplies .supplies-tools>label{flex:1 1 200px}#supplies .supplies-tools input,#supplies .supplies-tools select{width:100%}#supplies .supplies-count{font-size:13px;font-weight:normal;margin-left:12px}#supplies .supplies-note{font-size:13px;opacity:.8}#supplies button:disabled{opacity:.5;cursor:default}#supplies-total{padding:16px 0;border-top:1px solid #84939e}#supplies-status{min-height:1.5em}#supplies .supplies-row strong{font-size:14px}#supplies .supplies-row p{font-size:13px}#supplies .supplies-row button{padding:5px 10px}#supplies .supplies-row label{font-size:13px}
-@media(max-width:600px){#supplies-products,#supplies-cart{grid-template-columns:minmax(0,1fr)}#supplies .supplies-tools{gap:8px}#supplies input,#supplies select{font-size:16px}}
-
-/* Keep matching fields aligned across product cards. */
-#supplies-products>.detail-card{display:flex;flex-direction:column;align-items:stretch}
-#supplies-products>.detail-card>h3{line-height:1.5;min-height:3em;margin:0 0 12px}
-#supplies-products>.detail-card>p{line-height:1.7;min-height:5.1em;margin:8px 0 16px}
-#supplies-products>.detail-card>button{align-self:flex-start;margin-top:8px}
-
-#supplies input:not([type=checkbox]),#supplies select,#supplies textarea{border-color:#cdd7df;color-scheme:light;transition:border-color .15s,box-shadow .15s}
-#supplies input::placeholder,#supplies textarea::placeholder{color:#748491;opacity:1}
-#supplies input:not([type=checkbox]):hover,#supplies select:hover,#supplies textarea:hover{border-color:#9aadb9}
-#supplies input:focus-visible,#supplies select:focus-visible,#supplies textarea:focus-visible{outline:2px solid #668f9f;outline-offset:2px;border-color:#668f9f;box-shadow:0 0 0 3px rgba(102,143,159,.12)}
-
-#supplies .supplies-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:16px 0}
-#supplies .supplies-actions-left{display:flex;gap:10px;flex-wrap:wrap}
-#supplies .supplies-actions button{margin:0;transition:background-color .18s,color .18s,border-color .18s}
-#supplies #supplies-send{margin-left:auto}
-#supplies #supplies-download:hover:not(:disabled),#supplies #supplies-download:focus-visible{background:#315e70;border-color:#315e70;color:#fff}
-#supplies #supplies-clear:hover:not(:disabled),#supplies #supplies-clear:focus-visible{background:#90463f;border-color:#90463f;color:#fff}
-#supplies #supplies-send:hover:not(:disabled),#supplies #supplies-send:focus-visible{background:#286953;border-color:#286953;color:#fff}
-@media(prefers-reduced-motion:reduce){#supplies .supplies-actions button{transition:none}}
-</style>
 </head>
 <body>
 <div aria-hidden="true" class="background">
@@ -41,7 +15,7 @@
 <header class="topbar"><a aria-label="Home" class="mark" href="#top">
     <img alt="SYPLab Logo" class="nav-logo" src="./static/images/SYPLab-logo-white(1).png"/>
 </a>
-    <nav aria-label="Main navigation" class="nav"><a class="active" href="#top">Overview</a><a href="#supplies">Lab Supplies</a><a href="#list">To-do list</a><a
+    <nav aria-label="Main navigation" class="nav"><a class="active" href="#top">Overview</a><a href="#list">To-do list</a><a
             href="#publications">Publications</a><a href="#experiments">Maunal</a><a
             href="#about">About</a></nav>
 </header>
@@ -81,17 +55,6 @@
 
     <div class="content-sections">
         
-<section class="content-section" id="supplies" aria-labelledby="supplies-title">
-<div class="section-kicker">00 / LAB SUPPLIES</div><h2 id="supplies-title">Lab Supplies</h2>
-<p>实验室耗材采购 · 人民币报价，口罩、手套按盒购买，垫单按袋购买，最小购买数量为1。单价为整盒／整袋价格。总价为商品金额，运费及税费另行确认。</p>
-<div class="supplies-tools"><label>搜索耗材 <input id="supplies-search" type="search" placeholder="名称或规格"></label><label>分类 <select id="supplies-category"><option value="">全部分类</option><option>医用外科口罩</option><option>橡胶外科手套</option><option>一次性使用医用垫单（两层纸）</option><option>一次性使用医用垫单（棉／高分子）</option></select></label></div>
-<div class="detail-grid" id="supplies-products"></div><p id="supplies-status" role="status" aria-live="polite"></p>
-<article class="detail-card"><h3>采购清单 <span id="supplies-count" class="supplies-count">0 个规格</span></h3><div id="supplies-cart"></div><p id="supplies-total">商品总价：¥0.00</p>
-<form id="supplies-form"><div class="supplies-tools"><label>联系人（必填）<input name="contact" required maxlength="80" autocomplete="name"></label><label>单位名称<input name="organization" maxlength="160" autocomplete="organization"></label><label>联系电话（必填）<input name="phone" type="tel" required minlength="5" maxlength="30" autocomplete="tel"></label></div><label>备注<textarea name="notes" maxlength="2000" rows="3"></textarea></label>
-<p class="supplies-note">联系方式用于生成清单及联系确认采购需求。</p>
-<div class="supplies-actions"><div class="supplies-actions-left"><button type="submit" id="supplies-download">下载采购清单</button><button type="button" id="supplies-clear">清空清单</button></div><button type="button" id="supplies-send">邮件提交下单</button></div>
-<p><small>点击“邮件提交下单”将把清单和联系方式发送给商家，用于采购沟通。发送成功后可下载留存；刷新页面将清空清单。</small></p></form></article>
-<noscript>请启用 JavaScript 使用商品筛选和采购清单。</noscript></section>
 
         <section class="content-section" id="list">
             <div class="section-kicker">01 / LIST</div>
@@ -249,7 +212,7 @@
             <span>SYPLab</span></div>
 
 
-        <div class="footer-col"><h3>EXPLORE</h3><a href="#supplies">Lab Supplies</a><a href="#list">List</a><a href="#publications">Publications</a><a
+        <div class="footer-col"><h3>EXPLORE</h3><a href="#list">List</a><a href="#publications">Publications</a><a
                 href="#experiments">Experiments</a></div>
         <div class="footer-col"><h3>ABOUT</h3><a href="#about">About SYPLab</a><a href="#top">Back to top</a></div>
         <div class="footer-col"><h3>GITHUB</h3><a href="https://github.com/TianleNiu" rel="noopener noreferrer"
@@ -275,25 +238,5 @@
 <!-- SYPLab schedule management -->
 <script src="./static/js/schedules.js"></script>
 
-<script>
-(()=>{'use strict';
-const products=[{"name": "医用外科口罩", "unit": "盒", "specs": [{"name": "挂耳独立装", "price": 11000, "pack": "50只/盒；原包装：1只/袋、50只/盒、1500只/箱"}, {"name": "系带独立装", "price": 30000, "pack": "100只/盒（按原100只/中包折算为1盒）；原包装：1只/袋、100只/中包、1400只/箱"}, {"name": "挂耳十只装", "price": 15500, "pack": "100只/盒（按原100只/中包折算为1盒）；原包装：10只/袋、100只/中包、2400只/箱"}, {"name": "系带十只装", "price": 16600, "pack": "100只/盒（按原100只/中包折算为1盒）；原包装：10只/袋、100只/中包、2000只/箱"}]}, {"name": "橡胶外科手套", "unit": "盒", "specs": [{"name": "有粉", "price": 77150, "pack": "50副/盒；原包装：1副/袋、50副/盒、8盒/箱"}, {"name": "无粉", "price": 77150, "pack": "50副/盒；原包装：1副/袋、50副/盒、8盒/箱"}]}, {"name": "一次性使用医用垫单（两层纸）", "unit": "袋", "specs": [{"name": "40×60cm", "price": 16600, "pack": "20条/袋；原包装：20条/袋、1500条/箱"}, {"name": "80×150cm", "price": 23200, "pack": "10条/袋；原包装：10条/袋、300条/箱"}]}, {"name": "一次性使用医用垫单（棉／高分子）", "unit": "袋", "specs": [{"name": "40×60cm（一层棉）", "price": 5350, "pack": "5条/袋；原包装：5条/袋、600条/件"}, {"name": "40×60cm（高分子）", "price": 20400, "pack": "20条/袋；原包装：20条/袋、1200条/箱"}, {"name": "90×150cm（高分子）", "price": 11520, "pack": "2条/袋；原包装：2条/袋、200条/箱"}]}];
-const root=document.querySelector('#supplies'),$=s=>root.querySelector(s),money=n=>'¥'+(n/1000).toFixed(3).replace(/0$/,'');
-let cart=[];const status=t=>$('#supplies-status').textContent=t;
-function el(tag,text){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n}
-function qty(i){const n=Number(i.value);return Number.isInteger(n)&&n>=1&&n<=999999?n:null}
-const total=()=>cart.reduce((a,x)=>a+products[x.id].specs[x.variant].price*x.count,0);
-function catalog(){const box=$('#supplies-products');box.replaceChildren();products.forEach((p,id)=>{if($('#supplies-category').value&&$('#supplies-category').value!==p.name||!(p.name+JSON.stringify(p.specs)).toLowerCase().includes($('#supplies-search').value.trim().toLowerCase()))return;const card=el('article');card.className='detail-card';card.append(el('h3',p.name));const label=el('label','规格与单价'),select=el('select');p.specs.forEach((s,j)=>{const opt=el('option',s.name+' · '+money(s.price)+'/'+p.unit);opt.value=j;select.append(opt)});label.append(select);const pack=el('p');const update=()=>pack.textContent='包装：'+p.specs[select.value].pack;select.onchange=update;update();const ql=el('label','数量（'+p.unit+'）'),input=el('input');input.type='number';input.min=1;input.max=999999;input.step=1;input.value=1;ql.append(input);const button=el('button','加入采购清单');button.type='button';button.onclick=()=>{const count=qty(input),variant=Number(select.value);if(!count){status('数量需为 1–999999 的整数。');return}const old=cart.find(x=>x.id===id&&x.variant===variant);if(old&&old.count+count>999999){status('同一规格最多 999999。');return}if(old)old.count+=count;else cart.push({id,variant,count});render();status('已加入采购清单。')};card.append(label,pack,ql,button);box.append(card)});if(!box.children.length)box.append(el('p','没有匹配的商品。'))}
-function render(){const box=$('#supplies-cart');box.replaceChildren();if(!cart.length)box.append(el('p','清单为空。'));cart.forEach((x,j)=>{const p=products[x.id],s=p.specs[x.variant],row=el('div');row.className='supplies-row';row.append(el('strong',p.name),el('p',s.name+' · '+money(s.price)+'/'+p.unit));const label=el('label','数量（'+p.unit+'）'),input=el('input');input.type='number';input.min=1;input.max=999999;input.step=1;input.value=x.count;input.onchange=()=>{const n=qty(input);if(n){x.count=n;render()}else{input.value=x.count;status('请输入有效整数数量。')}};label.append(input);const remove=el('button','移除');remove.type='button';remove.onclick=()=>{cart.splice(j,1);render()};row.append(label,el('span','小计 '+money(s.price*x.count)),remove);box.append(row)});$('#supplies-count').textContent=cart.length+' 个规格';$('#supplies-total').textContent='商品总价：'+money(total())}
-function payload(){if(!$('#supplies-form').reportValidity())return;if(!cart.length){status('请先添加商品。');return}const d=new FormData($('#supplies-form'));return {contact:d.get('contact').trim(),organization:d.get('organization').trim(),phone:d.get('phone').trim(),notes:d.get('notes').trim(),items:cart.map(x=>({...x}))}}
-function text(d){return ['SYPLab 采购清单','时间：'+new Date().toLocaleString(),'联系人：'+d.contact,'单位：'+d.organization,'电话：'+d.phone,'',...d.items.map(x=>{const p=products[x.id],s=p.specs[x.variant];return p.name+' | '+s.name+' | '+s.pack+' | 单价 '+money(s.price)+'/'+p.unit+' | 数量 '+x.count+p.unit+' | 小计 '+money(s.price*x.count)}),'','商品总价：'+money(total()),'备注：'+d.notes,'人民币商品报价，运费及税费另行确认。价格不含运费及待确认税费，是否提交成功以页面提示为准。'].join('\n')}
-$('#supplies-form').onsubmit=e=>{e.preventDefault();const d=payload();if(!d)return;const url=URL.createObjectURL(new Blob(['\ufeff'+text(d)],{type:'text/plain;charset=utf-8'}));const a=el('a');a.href=url;const now=new Date(),date=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');const contact=d.contact.replace(/[<>:\x22/\\|?*\x00-\x1f]/g,'_').replace(/[. ]+$/g,'')||'联系人';a.download=contact+'+'+date+'.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);status('采购清单已生成下载，包含商品数量、小计和总价；尚未提交订单。')};
-// Set to the deployed Supabase function URL. No private keys belong here.
-const ORDER_ENDPOINT = 'https://gbsjyqpmyqjdlonovrnx.supabase.co/functions/v1/supplies-order';
-let pending=null,lastSent='';
-$('#supplies-send').onclick=async()=>{const d=payload();if(!d)return;if(!ORDER_ENDPOINT){status('邮件下单暂未开通，请先下载清单。');return}const snapshot=JSON.stringify(d);if(snapshot===lastSent){status('该清单已下单成功，请勿重复提交。');return}if(!pending||pending.snapshot!==snapshot)pending={snapshot,id:crypto.randomUUID()};const button=$('#supplies-send');button.disabled=true;status('正在发送采购清单，请稍候…');try{const response=await fetch(ORDER_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...d,requestId:pending.id}),signal:AbortSignal.timeout(30000)});const result=await response.json();if(!response.ok||result.ok!==true||!result.emailId)throw Error();lastSent=snapshot;window.alert('订单已发送成功');status('下单成功！采购清单已提交至邮件服务。订单编号：'+result.orderId+'。你可以下载清单留存。')}catch{status('尚未确认下单成功。清单已保留，可重试或下载；若请求超时，请先联系商家核实。')}finally{button.disabled=false}};
-$('#supplies-search').oninput=catalog;$('#supplies-category').onchange=catalog;$('#supplies-clear').onclick=()=>{cart=[];render();status('清单已清空。')};catalog();render();
-})();
-</script>
 </body>
 </html>
