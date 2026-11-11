@@ -15,15 +15,16 @@
 <header class="topbar"><a aria-label="Home" class="mark" href="#top">
     <img alt="SYPLab Logo" class="nav-logo" src="./static/images/SYPLab-logo-white(1).png"/>
 </a>
-    <nav aria-label="Main navigation" class="nav"><a class="active" href="#top">Overview</a><a href="#list">To-do list</a><a
-            href="#publications">Publications</a><a href="#experiments">Maunal</a><a
+    <nav aria-label="Main navigation" class="nav"><a class="active" href="#top">Overview</a><a href="#list">Schedules</a><a
+            href="#publications">Publications</a><a href="#experiments">Resources</a><a
             href="#about">About</a></nav>
 </header>
 <main id="top">
     <section class="hero"><h1>SYPLab</h1>
-        <p>"Shape the future of biology with us"</p></section>
+        <p class="hero-slogan">“Shape the future of biology with us”</p>
+        <p class="hero-intro">A research group studying skin inflammation and melanoma.</p></section>
     <section aria-label="Research and resources" class="cards" id="features">
-        <a class="apply-card explorer" href="">
+        <article class="apply-card explorer">
             <svg aria-hidden="true" class="pattern" preserveaspectratio="none" viewbox="0 0 1048 180">
                 <g fill="none" opacity=".18" stroke="#aeb7be" stroke-width=".6">
                     <path d="M440 -100 C450 90 510 170 550 300"></path>
@@ -35,8 +36,10 @@
                     <path d="M1030 -100 C900 90 950 170 1020 300"></path>
                 </g>
             </svg>
-            <h2>Melanoma</h2><small>Explore research directions and projects</small><span class="arrow">↗</span></a>
-        <a class="apply-card pathfinder" href=" ">
+            <h2>Melanoma</h2>
+            <p>How melanoma cells interact with their surrounding tissue and evade the immune response, and what that means for new treatment strategies.</p>
+        </article>
+        <article class="apply-card pathfinder">
             <svg aria-hidden="true" class="pattern" preserveaspectratio="none" viewbox="0 0 1048 180">
                 <g fill="none" opacity=".23" stroke="#aab3ba" stroke-width=".7">
                     <path d="M200 130 Q370 -70 570 70 T1050 40"></path>
@@ -50,15 +53,17 @@
                     <path d="M280 -30 Q630 180 900 80 T1100 35"></path>
                 </g>
             </svg>
-            <h2>Psoriasis</h2><small>Browse experiment notes and shared materials</small><span class="arrow">↗</span></a>
+            <h2>Psoriasis</h2>
+            <p>The immune and skin-cell signals that keep inflammation going in psoriasis, and how they might be interrupted.</p>
+        </article>
     </section>
 
     <div class="content-sections">
         
 
         <section class="content-section" id="list">
-            <div class="section-kicker">01 / LIST</div>
-            <h2>Public Affairs</h2>
+            <div class="section-kicker">01 / SCHEDULES</div>
+            <h2>Schedules</h2>
             <p>Team meeting arrangements and laboratory cleaning schedules.</p>
             <div class="schedule-section">
                 <!-- Team Meeting -->
@@ -69,7 +74,7 @@
                             <h3>Team Meeting</h3>
                             <p>2026–2027 · Fall / Winter Semester</p>
                         </div>
-                        <span class="meeting-count">12 Sessions</span>
+                        <span class="meeting-count"></span>
                     </div>
 
                     <div class="table-scroll meeting-scroll">
@@ -96,7 +101,7 @@
                             <h3>Cleaning Schedule</h3>
                             <p>2026–2027 · Laboratory cleaning assignments</p>
                         </div>
-                        <span class="meeting-count">12 Weeks</span>
+                        <span class="meeting-count"></span>
                     </div>
 
                     <div class="table-scroll meeting-scroll">
@@ -120,9 +125,9 @@
                     <div class="schedule-heading">
                         <div>
                             <h3>FIST危废处理</h3>
-                            <p>2026–2027 · </p>
+                            <p>2026–2027 · Hazardous waste duty</p>
                         </div>
-                        <span class="meeting-count">1 student</span>
+                        <span class="meeting-count"></span>
                     </div>
 
                     <div class="table-scroll meeting-scroll">
@@ -151,25 +156,10 @@
                         class="coming-soon">Content coming soon</span></div>
         </section>
         <section class="content-section" id="experiments">
-            <div class="section-kicker">03 / EXPERIMENTS</div>
-            <h2>Experimental Resources</h2>
+            <div class="section-kicker">03 / RESOURCES</div>
+            <h2>Resources</h2>
             <p>A place for publicly shareable experiment documentation, protocols, sample code, and downloadable
                 materials.</p>
-            <div class="detail-grid">
-                <article class="detail-card"><h3>Experiment Notes</h3>
-                    <p>Introduce each experiment, its objective, methods, and results.</p><span class="coming-soon">Content coming soon</span>
-                </article>
-                <article class="detail-card"><h3>Downloads</h3>
-                    <p>After adding approved public files to <code>resources/</code>, link them here using relative
-                        paths.</p><span class="coming-soon">No public downloads yet</span></article>
-            </div>
-        </section>
-        <section class="content-section" id="about">
-            <div class="section-kicker">04 / ABOUT</div>
-
-            <h2>About SYPLab</h2>
-            <p>SYPLab is pretty.</p>
-
             <!-- Laboratory Resources -->
             <article class="detail-card lab-resources">
 
@@ -181,7 +171,7 @@
                             laboratory materials.
                         </p>
                     </div>
-                    <span class="lab-resource-count">01 FILE</span>
+                    <span class="lab-resource-count">1 file</span>
                 </div>
                 <div class="lab-resource-item">
                     <div class="lab-resource-icon">
@@ -203,6 +193,12 @@
                 </div>
             </article>
         </section>
+        <section class="content-section" id="about">
+            <div class="section-kicker">04 / ABOUT</div>
+
+            <h2>About SYPLab</h2>
+            <p>SYPLab is pretty.</p>
+        </section>
     </div>
 </main>
 <footer class="footer" id="footer">
@@ -212,13 +208,11 @@
             <span>SYPLab</span></div>
 
 
-        <div class="footer-col"><h3>EXPLORE</h3><a href="#list">List</a><a href="#publications">Publications</a><a
-                href="#experiments">Experiments</a></div>
+        <div class="footer-col"><h3>EXPLORE</h3><a href="#list">Schedules</a><a href="#publications">Publications</a><a
+                href="#experiments">Resources</a></div>
         <div class="footer-col"><h3>ABOUT</h3><a href="#about">About SYPLab</a><a href="#top">Back to top</a></div>
-        <div class="footer-col"><h3>GITHUB</h3><a href="https://github.com/TianleNiu" rel="noopener noreferrer"
-                                                  target="_blank">TianleNiu ↗</a></div>
     </div>
-    <div class="footer-bottom"><span>© SYPLab 2026</span>
+    <div class="footer-bottom"><span>© SYPLab 2026<button class="admin-link" id="admin-open" type="button">Admin sign-in</button></span>
         <div aria-label="Social links" class="social">
             <a aria-label="GitHub" href="https://github.com/TianleNiu" rel="noopener noreferrer" target="_blank">
                 <svg aria-hidden="true" viewbox="0 0 24 24">
@@ -237,6 +231,9 @@
 
 <!-- SYPLab schedule management -->
 <script src="./static/js/schedules.js"></script>
+
+<!-- Navigation highlight -->
+<script src="./static/js/nav.js"></script>
 
 </body>
 </html>

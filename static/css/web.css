@@ -4,8 +4,33 @@
 /* Base & typography */
 :root {
     color-scheme: light;
-    --ink: #090909;
-    --muted: #747474;
+
+    /* Text: from strongest to faintest */
+    --ink: #090909;          /* headings, active nav */
+    --text-1: #2b3138;       /* strong body text, inputs */
+    --text-2: #4f5761;       /* table cells, footer links */
+    --text-3: #6b7279;       /* descriptions, secondary text */
+    --text-4: #8a9198;       /* labels, captions, past dates */
+    --text-faint: #b4b9be;   /* deliberately quiet: admin link */
+    --muted: var(--text-3);
+
+    /* Lines and surfaces */
+    --line: #eaedf0;         /* card and table borders, dividers */
+    --line-strong: #dce0e4;  /* input and button borders */
+    --surface-1: #f8fafb;    /* soft card backgrounds */
+    --surface-2: #f4f6f7;    /* table headers, badges, hovers */
+
+    /* The one accent colour */
+    --accent: #3f6e8c;
+    --accent-soft: #eaf1f6;
+    --accent-ink: #24465c;
+
+    /* Secondary row highlight (optional "note" rows) */
+    --note: #e0a826;
+    --note-soft: #fff6dc;
+    --note-ink: #5c4610;
+
+    --danger: #b42318;
 }
 * {
     box-sizing: border-box;
@@ -35,7 +60,7 @@ a {
     inset: 0 0 auto;
     height: 510px;
     overflow: hidden;
-    background: linear-gradient(to bottom, #f7f9fa 0%, #fff 95%);
+    background: linear-gradient(to bottom, var(--surface-1) 0%, #fff 95%);
     pointer-events: none;
 }
 
@@ -84,13 +109,22 @@ a {
     }
 }
 
+/* The nav stays pinned while scrolling; only the pill and logo catch clicks */
 .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    pointer-events: none;
     height: 91px;
     display: flex;
     align-items: flex-start;
     justify-content: center;
     padding-top: 23px;
     gap: 22px;
+}
+.mark,
+.nav {
+    pointer-events: auto;
 }
 .mark {
     height: 47px;
@@ -112,33 +146,33 @@ a {
     align-items: center;
     gap: 1px;
     padding: 5px 6px;
-    background: rgba(255, 255, 255, .65);
+    background: rgba(255, 255, 255, .85);
     border-radius: 45px;
     box-shadow: 0 5px 35px rgba(20, 25, 30, .045);
     backdrop-filter: blur(14px);
 }
 .nav a {
     font-size: 14px;
-    color: #666;
+    color: var(--text-3);
     padding: 11px 20px;
     border-radius: 30px;
     transition: .2s;
     white-space: nowrap;
 }
 .nav a:hover {
-    background: #f5f5f5;
-    color: #080808;
+    background: var(--surface-2);
+    color: var(--ink);
 }
 .nav a.active {
     background: white;
-    color: #080808;
+    color: var(--ink);
     box-shadow: 0 4px 16px rgba(0, 0, 0, .065);
 }
 
 /* Hero & feature cards */
 .hero {
     text-align: center;
-    padding: 104px 16px 150px;
+    padding: 104px 16px 96px;
 }
 .hero h1 {
     font-size: clamp(42px, 3.7vw, 58px);
@@ -147,15 +181,22 @@ a {
     margin: 0;
     font-weight: 800;
 }
-.hero p {
+.hero .hero-slogan {
     font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
     font-size: clamp(23px, 3.5vw, 50px);
     font-style: italic;
     font-weight: 500;
     line-height: 1.35;
     letter-spacing: -1.2px;
-    color: #6c6c6c;
+    color: var(--text-3);
     margin: 23px 0 0;
+}
+.hero .hero-intro {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-4);
+    margin: 18px auto 0;
+    max-width: 34em;
 }
 .cards {
     max-width: 1048px;
@@ -168,19 +209,22 @@ a {
     width: 100%;
     min-height: 180px;
     padding: 44px 34px;
-    border: 1px solid #f0f1f2;
+    border: 1px solid var(--line);
     text-align: left;
     border-radius: 23px;
     background: linear-gradient(105deg, #fff 12%, rgba(250, 251, 252, .96) 50%, rgba(224, 228, 231, .9) 100%);
     overflow: hidden;
     box-shadow: 0 14px 28px rgba(32, 36, 43, .048);
-    cursor: pointer;
     isolation: isolate;
     transition: transform .3s, box-shadow .3s;
     display: block;
     color: inherit;
 }
-.apply-card:hover {
+/* Only cards that link somewhere lift on hover */
+a.apply-card {
+    cursor: pointer;
+}
+a.apply-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 22px 42px rgba(32, 36, 43, .095);
 }
@@ -193,9 +237,18 @@ a {
     position: relative;
     z-index: 1;
 }
+.apply-card p {
+    position: relative;
+    z-index: 1;
+    max-width: 34em;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text-3);
+}
 .apply-card small {
     font-size: 14px;
-    color: #777;
+    color: var(--text-3);
     font-weight: 600;
     position: relative;
     z-index: 1;
@@ -209,19 +262,19 @@ a {
     opacity: .55;
 }
 .apply-card.pathfinder {
-    background: linear-gradient(102deg, #fff 0%, #fafbfc 55%, #e4e7e9 100%);
+    background: linear-gradient(102deg, #fff 0%, var(--surface-1) 55%, #e4e7e9 100%);
 }
 .arrow {
     position: absolute;
     right: 31px;
     top: calc(50% - 12px);
     font-size: 24px;
-    color: #777;
+    color: var(--text-3);
     opacity: 0;
     transform: translateX(-8px);
     transition: .25s;
 }
-.apply-card:hover .arrow {
+a.apply-card:hover .arrow {
     opacity: 1;
     transform: translateX(0);
 }
@@ -229,16 +282,16 @@ a {
 /* Content sections */
 .content-sections {
     max-width: 1048px;
-    margin: 0 auto 130px;
+    margin: 0 auto 40px;
     padding: 0 8px;
 }
 .content-section {
-    scroll-margin-top: 55px;
+    scroll-margin-top: 80px;
     padding: 54px 0 70px;
-    border-top: 1px solid #e9ebed;
+    border-top: 1px solid var(--line);
 }
 .section-kicker {
-    color: #899198;
+    color: var(--text-4);
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -250,7 +303,7 @@ a {
     margin: 0 0 18px;
 }
 .content-section > p {
-    color: #6b7279;
+    color: var(--text-3);
     max-width: 760px;
     line-height: 1.8;
     font-size: 16px;
@@ -262,9 +315,9 @@ a {
     gap: 18px;
 }
 .detail-card {
-    background: linear-gradient(110deg,#fff,#f7f9fa);
+    background: linear-gradient(110deg,#fff,var(--surface-1));
     padding: 30px;
-    border: 1px solid #e9ecef;
+    border: 1px solid var(--line);
     border-radius: 20px;
     min-height: 160px;
 }
@@ -277,13 +330,13 @@ a {
     font-size: 21px;
 }
 .detail-card p {
-    color: #6b7279;
+    color: var(--text-3);
     line-height: 1.7;
     margin: 0 0 18px;
 }
 .coming-soon {
     font-size: 12px;
-    color: #929ca5;
+    color: var(--text-4);
     font-weight: 600;
     letter-spacing: .3px;
 }
@@ -296,13 +349,14 @@ a {
 /* Schedule cards & tables */
 .schedule-section {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 24px;
     margin-top: 30px;
 }
 .schedule-card {
+    min-width: 0;
     padding: 30px;
-    border: 1px solid #ededed;
+    border: 1px solid var(--line);
     border-radius: 20px;
     background: #fff;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.035);
@@ -311,16 +365,17 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
     margin-bottom: 20px;
 }
 .schedule-heading h3 {
     margin: 0 0 8px;
     font-size: 23px;
-    color: #111;
+    color: var(--ink);
 }
 .schedule-heading p {
     margin: 0;
-    color: #888;
+    color: var(--text-4);
     font-size: 13px;
 }
 .table-scroll {
@@ -335,22 +390,22 @@ a {
     text-align: left;
 }
 .syplab-table thead {
-    background: #f6f7f8;
+    background: var(--surface-2);
 }
 .syplab-table th {
     padding: 15px 18px;
-    color: #555;
+    color: var(--text-2);
     font-size: 12px;
     font-weight: 700;
     white-space: nowrap;
 }
 .syplab-table td {
     padding: 16px 18px;
-    border-bottom: 1px solid #eeeeee;
-    color: #444;
+    border-bottom: 1px solid var(--line);
+    color: var(--text-2);
 }
 .syplab-table tbody tr:hover {
-    background: #fafbfc;
+    background: var(--surface-1);
 }
 .syplab-table tbody tr:last-child td {
     border-bottom: none;
@@ -359,7 +414,7 @@ a {
     max-height: 360px;
     overflow-y: auto;
     overflow-x: auto;
-    border: 1px solid #eeeeee;
+    border: 1px solid var(--line);
     border-radius: 12px;
     overscroll-behavior: contain;
 }
@@ -372,26 +427,37 @@ a {
     position: sticky;
     top: 0;
     z-index: 2;
-    background: #f6f7f8;
+    background: var(--surface-2);
     font-size: 15px;
-    padding: 17px 20px;
+    padding: 16px 20px;
 }
 .meeting-scroll .syplab-table th {
     font-size: 15px;
     font-weight: 700;
-    padding: 18px 20px;
+    padding: 16px 20px;
 }
 .meeting-scroll .syplab-table td {
     font-size: 17px;
     padding: 17px 20px;
     line-height: 1.5;
 }
+/* Dates that have already passed fade back */
+.syplab-table tbody tr.is-past td {
+    color: var(--text-4);
+}
+/* Keep the count badge on the right, next to "+ Add" when it appears */
+.schedule-heading .meeting-count {
+    margin-left: auto;
+}
+.meeting-count:empty {
+    display: none;
+}
 .meeting-count {
     display: inline-block;
     padding: 7px 12px;
     border-radius: 20px;
-    background: #f3f4f5;
-    color: #666;
+    background: var(--surface-2);
+    color: var(--text-3);
     font-size: 12px;
     font-weight: 600;
     white-space: nowrap;
@@ -410,29 +476,31 @@ a {
 
 /* Footer */
 .footer {
-    border-top: 1px solid #ebebeb;
+    border-top: 1px solid var(--line);
     padding: 77px max(7%, calc((100vw - 1110px) / 2)) 28px;
-    color: #555;
+    color: var(--text-2);
     font-size: 13px;
     background: #fff;
 }
 .footer-top {
     display: grid;
-    grid-template-columns: 1.65fr 1fr 1fr .8fr;
+    grid-template-columns: 2.45fr 1fr 1fr;
     column-gap: 45px;
-    min-height: 230px;
+    min-height: 200px;
 }
 .footer-brand {
     display: flex;
     align-items: flex-start;
     gap: 1px;
-    color: #111;
+    color: var(--ink);
     font-size: 40px;
     font-weight: 300;
     letter-spacing: -2px;
     line-height: 1;
 }
 .footer-brand .footer-logo {
+    /* the logo file has transparent padding on its left edge */
+    margin-left: -8px;
     width: 46px;
     height: 40px;
     object-fit: contain;
@@ -443,7 +511,7 @@ a {
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 2px;
-    color: #999;
+    color: var(--text-4);
     margin: 4px 0 24px;
 }
 .footer-col a {
@@ -453,19 +521,19 @@ a {
     font-size: 13px;
     line-height: 1.5;
     margin-bottom: 13px;
-    color: #555;
+    color: var(--text-2);
     transition: color .2s;
 }
 .footer-col a:hover, .social a:hover {
-    color: #000;
+    color: var(--ink);
 }
 .footer-bottom {
-    border-top: 1px solid #e9e9e9;
+    border-top: 1px solid var(--line);
     padding-top: 28px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #929292;
+    color: var(--text-4);
     font-size: 12px;
 }
 .social {
@@ -474,7 +542,7 @@ a {
     align-items: center;
 }
 .social a {
-    color: #777;
+    color: var(--text-3);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -496,6 +564,7 @@ a {
         padding-bottom: 45px;
     }
     .footer-brand {
+        grid-column: 1 / -1;
         font-size: 33px;
     }
     .footer-col h3 {
@@ -512,6 +581,9 @@ a {
         height: 78px;
         padding: 15px 10px;
         gap: 9px;
+    }
+    .content-section {
+        scroll-margin-top: 66px;
     }
     .mark {
         width: 40px;
@@ -532,14 +604,17 @@ a {
         font-size: 12px;
     }
     .hero {
-        padding: 105px 16px 100px;
+        padding: 80px 20px 64px;
     }
     .hero h1 {
         font-size: 44px;
     }
-    .hero p {
+    .hero .hero-slogan {
         font-size: clamp(22px, 5.7vw, 34px);
         letter-spacing: -.5px;
+    }
+    .hero .hero-intro {
+        font-size: 14px;
     }
     .cards {
         margin: 0 18px 65px;
@@ -571,19 +646,19 @@ a {
     }
     .meeting-scroll .syplab-table {
         font-size: 15px;
-        min-width: 350px;
+        min-width: 0;
     }
     .meeting-scroll .syplab-table thead th {
         font-size: 14px;
-        padding: 15px 12px;
+        padding: 14px 12px;
     }
     .meeting-scroll .syplab-table td {
         font-size: 15px;
-        padding: 16px 12px;
+        padding: 15px 12px;
     }
     .content-sections {
         padding: 0 20px;
-        margin-bottom: 70px;
+        margin-bottom: 24px;
     }
     .detail-grid {
         grid-template-columns: 1fr;
@@ -596,6 +671,19 @@ a {
     }
     .meeting-scroll {
         max-height: 330px;
+    }
+}
+
+/* Narrow phones: drop the round logo so all five nav items fit */
+@media (max-width: 420px) {
+    .topbar .mark {
+        display: none;
+    }
+    .nav {
+        max-width: calc(100vw - 20px);
+    }
+    .nav a {
+        padding: 10px 9px;
     }
 }
 
@@ -631,15 +719,15 @@ a {
 .schedule-form input {
     font: inherit;
     padding: 11px 13px;
-    border: 1px solid #d9dde1;
+    border: 1px solid var(--line-strong);
     border-radius: 9px;
     background: white;
 }
 
 .schedule-btn {
-    border: 1px solid #dce0e4;
+    border: 1px solid var(--line-strong);
     background: white;
-    color: #333;
+    color: var(--text-1);
     border-radius: 9px;
     padding: 9px 13px;
     font: inherit;
@@ -649,11 +737,11 @@ a {
 }
 
 .schedule-btn:hover {
-    background: #f0f2f4;
+    background: var(--surface-2);
 }
 
 .schedule-btn.danger {
-    color: #b42318;
+    color: var(--danger);
 }
 
 .schedule-actions {
@@ -701,7 +789,7 @@ a {
 }
 
 #schedule-editor-error {
-    color: #b42318;
+    color: var(--danger);
     font-size: 13px;
     margin: 0;
 }
@@ -723,7 +811,7 @@ a {
 
 .schedule-admin-panel {
     border-radius: 16px;
-    margin-top: 30px;
+    margin-top: 0;
     padding: 0;
     border: 0;
     background: transparent;
@@ -768,7 +856,7 @@ a {
 }
 
 .admin-trigger:hover {
-    background: #fafbfc;
+    background: var(--surface-1);
 }
 
 .admin-trigger-icon {
@@ -779,9 +867,9 @@ a {
     height: 42px;
     flex-shrink: 0;
     border-radius: 12px;
-    background: #f2f3f5;
+    background: var(--surface-2);
     font-size: 20px;
-    color: #4d5560;
+    color: var(--text-2);
 }
 
 .admin-trigger-text,
@@ -795,13 +883,13 @@ a {
 .admin-logged-text strong {
     font-size: 14px;
     font-weight: 650;
-    color: #252a30;
+    color: var(--text-1);
 }
 
 .admin-trigger-text small,
 .admin-logged-text small {
     font-size: 12px;
-    color: #8a919a;
+    color: var(--text-4);
 }
 
 .admin-chevron {
@@ -809,8 +897,8 @@ a {
     height: 9px;
     margin-left: auto;
     margin-right: 6px;
-    border-right: 1.7px solid #8a919a;
-    border-bottom: 1.7px solid #8a919a;
+    border-right: 1.7px solid var(--text-4);
+    border-bottom: 1.7px solid var(--text-4);
     transform: rotate(45deg);
     transition: transform 0.22s ease;
 }
@@ -837,13 +925,13 @@ a {
 
 .admin-divider {
     height: 1px;
-    background: #f0f1f3;
+    background: var(--surface-2);
     margin-bottom: 19px;
 }
 
 .admin-description {
     font-size: 13px;
-    color: #818892;
+    color: var(--text-4);
     line-height: 1.6;
     margin: 0 0 20px;
 }
@@ -864,7 +952,7 @@ a {
 }
 
 .admin-input-group label {
-    color: #5e6771;
+    color: var(--text-2);
     font-size: 12px;
     font-weight: 600;
 }
@@ -873,20 +961,20 @@ a {
     box-sizing: border-box;
     width: 100%;
     height: 44px;
-    border: 1px solid #e0e4e8;
+    border: 1px solid var(--line-strong);
     border-radius: 11px;
     padding: 0 13px;
-    background: #fafbfc;
+    background: var(--surface-1);
     font: inherit;
     font-size: 13px;
-    color: #252a30;
+    color: var(--text-1);
     outline: none;
     transition: all 0.2s ease;
 }
 
 .admin-input-group input:focus {
     background: #fff;
-    border-color: #9aa5b1;
+    border-color: var(--accent);
     box-shadow: 0 0 0 3px rgba(100, 115, 130, 0.09);
 }
 
@@ -905,7 +993,12 @@ a {
     transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.admin-login-button:hover {
+.admin-login-button:disabled {
+    opacity: .6;
+    cursor: wait;
+    transform: none;
+}
+.admin-login-button:hover:not(:disabled) {
     background: #424b55;
     transform: translateY(-1px);
 }
@@ -936,9 +1029,9 @@ a {
 
 .admin-logout-button {
     margin-left: auto;
-    border: 1px solid #e4e7eb;
+    border: 1px solid var(--line);
     background: #fff;
-    color: #59626c;
+    color: var(--text-2);
     padding: 9px 15px;
     border-radius: 9px;
     font: inherit;
@@ -948,19 +1041,70 @@ a {
 }
 
 .admin-logout-button:hover {
-    background: #f5f6f8;
+    background: var(--surface-2);
 }
 
 /* Status messages */
 
 #schedule-message {
     margin: 10px 4px 0;
-    color: #7d858e;
+    color: var(--text-3);
     font-size: 12px;
 }
 
 #schedule-message:empty {
     display: none;
+}
+
+/* Admin sign-in: footer link and dialog */
+.admin-link {
+    margin-left: 18px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--text-faint);
+    font-size: 12px;
+    cursor: pointer;
+}
+.admin-link:hover {
+    color: var(--text-2);
+}
+.admin-link[hidden] {
+    display: none;
+}
+.admin-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+.admin-dialog h3 {
+    margin: 0 0 8px;
+    font-size: 23px;
+}
+.admin-dialog #schedule-login-form.admin-login-form {
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+.admin-dialog .schedule-form-actions {
+    margin-top: 4px;
+}
+.admin-dialog #admin-cancel,
+.schedule-dialog #schedule-cancel {
+    height: 44px;
+    padding: 0 18px;
+    border-radius: 11px;
+    font-size: 13px;
+}
+#admin-login-error {
+    margin: 0;
+    color: var(--danger);
+    font-size: 13px;
+}
+#admin-login-error:empty {
+    display: none;
+}
+.schedule-admin-panel:has(#schedule-admin-logged:not([hidden])) {
+    margin-bottom: 20px;
 }
 
 /* Responsive layout */
@@ -1011,12 +1155,12 @@ a {
     margin: 0 0 8px;
     font-size: 23px;
     font-weight: 700;
-    color: #252a30;
+    color: var(--text-1);
 }
 
 .lab-resources-header p {
     margin: 0;
-    color: #818892;
+    color: var(--text-4);
     font-size: 14px;
     line-height: 1.6;
 }
@@ -1025,11 +1169,10 @@ a {
     flex-shrink: 0;
     padding: 7px 12px;
     border-radius: 30px;
-    background: #f2f4f6;
-    color: #78818b;
-    font-size: 11px;
+    background: var(--surface-2);
+    color: var(--text-3);
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.05em;
 }
 
 .lab-resource-item {
@@ -1037,16 +1180,16 @@ a {
     align-items: center;
     gap: 16px;
     padding: 19px;
-    border: 1px solid #edf0f2;
+    border: 1px solid var(--line);
     border-radius: 16px;
-    background: #fafbfc;
+    background: var(--surface-1);
     transition: background 0.2s ease,
                 border-color 0.2s ease;
 }
 
 .lab-resource-item:hover {
     background: #fff;
-    border-color: #dce1e5;
+    border-color: var(--line-strong);
 }
 
 .lab-resource-icon {
@@ -1057,8 +1200,8 @@ a {
     align-items: center;
     justify-content: center;
     border-radius: 13px;
-    background: #e9eef7;
-    color: #48648e;
+    background: var(--accent-soft);
+    color: var(--accent);
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.04em;
@@ -1073,13 +1216,13 @@ a {
     margin: 0 0 6px;
     font-size: 15px;
     font-weight: 650;
-    color: #252a30;
+    color: var(--text-1);
 }
 
 .lab-resource-info p {
     margin: 0;
     font-size: 12px;
-    color: #9098a2;
+    color: var(--text-4);
 }
 
 .lab-download-btn {
@@ -1089,10 +1232,10 @@ a {
     gap: 10px;
     flex-shrink: 0;
     padding: 12px 17px;
-    border: 1px solid #e0e4e8;
+    border: 1px solid var(--line-strong);
     border-radius: 12px;
     background: #fff;
-    color: #343b43;
+    color: var(--text-1);
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
@@ -1124,9 +1267,30 @@ a {
     }
 }
 
-/* 自定义日期行高亮 */
-.syplab-table tbody tr[data-highlight="true"] > td {
-    background-color: inherit !important;
+/* 行高亮：主题色（本周 / 当前）与次要色（备注），左侧带色条 */
+.syplab-table tbody tr.is-highlight > td,
+.syplab-table tbody tr.is-highlight:hover > td {
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+}
+.syplab-table tbody tr.is-highlight > td:first-child {
+    box-shadow: inset 3px 0 0 var(--accent);
+}
+.syplab-table tbody tr.is-note > td,
+.syplab-table tbody tr.is-note:hover > td {
+    background: var(--note-soft);
+    color: var(--note-ink);
+}
+.syplab-table tbody tr.is-note > td:first-child {
+    box-shadow: inset 3px 0 0 var(--note);
+}
+.schedule-form select {
+    font: inherit;
+    padding: 11px 13px;
+    border: 1px solid var(--line-strong);
+    border-radius: 9px;
+    background: white;
+    color: var(--text-1);
 }
 
 .schedule-color-control {
